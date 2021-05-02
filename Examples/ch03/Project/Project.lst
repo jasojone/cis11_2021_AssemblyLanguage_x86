@@ -1,39 +1,7 @@
-Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 13:32:38
-Addand Subtract(AddSub.asm				     Page 1 - 1
+Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 14:47:13
+..\AddSub.asm						     Page 1 - 1
 
 
-				comment!
-				TITLE Addand Subtract(AddSub.asm)
-
-				INCLUDE Irvine32.inc
-
-				.data
-				num1 DWORD 3
-				num2 DWORD 2
-
-				.code
-				main PROC
-
-				mov ecx, num1
-				mov edx, num2
-				imul edx, ecx, 4
-				call dumpregs
-
-
-				call WriteInt
-
-
-
-
-				exit
-				main ENDP
-				END main
-				!
-
-
-
-				; comment!
-				TITLE Addand Subtract(AddSub.asm)
 
 				INCLUDE Irvine32.inc
 			      C ; Include file for Irvine32.lib             (Irvine32.inc)
@@ -55,130 +23,35 @@ Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 13:32:38
 			      C 
 
  00000000			.data
-
- 00000000 54 68 69 73 20	myString BYTE  "This is a long string, containing",
-	   69 73 20 61 20
-	   6C 6F 6E 67 20
-	   73 74 72 69 6E
-	   67 2C 20 63 6F
-	   6E 74 61 69 6E
-	   69 6E 67 61 6E
-	   79 20 6E 75 6D
-	   62 65 72 20 6F
-	   66 20 63 68 61
-	   72 61 63 74 65
-	   72 73 00
- 0000003A			"any number of characters", 0
- = 0000003A			myString_len = ($ - myString)
+ 00000000 48 65 72 65 20	message BYTE "Here is the number: ", 0
+	   69 73 20 74 68
+	   65 20 6E 75 6D
+	   62 65 72 3A 20
+	   00
+ 00000015 05			number SBYTE 5
 
  00000000			.code
 
  00000000			main PROC
- 00000000  B8 0000003A		mov eax, myString_len
- 00000005  E8 00000000 E	call WriteInt
+
+ 00000000  0F B6 05		movzx eax, number;// eax = 5
+	   00000015 R
+ 00000007  83 E8 0A		sub eax, 10
+
+ 0000000A  BA 00000000 R	mov edx, OFFSET message;// move the mem adress of message to the edx for printing
+
+ 0000000F  E8 00000000 E	call WriteString;// displays what is in the edx
+
+ 00000014  E8 00000000 E	call WriteInt;//display the -5
+
+ 00000019  E8 00000000 E	call Crlf;//new line
 
 				exit
- 00000011			main ENDP
+ 00000025			main ENDP
 				END main
-				;
 
-
-
-
-				comment!
-				TITLE Addand Subtract(AddSub.asm)
-
-				INCLUDE Irvine32.inc
-
-				.data
-				COUNT = 10;// a constant 10
-				number DWORD 4
-
-
-				.code
-
-				main PROC
-
-				mov ebx, 2
-				mov eax, 3
-				add eax, ebx;//EAX = 5
-
-				call WriteInt
-				add eax, COUNT;// EAX = 15
-				call Crlf;//new line (carriage return line feed)
-				call WriteInt;
-				add eax, number;// EAX = 19
-				call Crlf;//new line
-				call WriteInt
-
-				exit
-				main ENDP
-				END main
-				!
-
-
-
-
-
-
-				comment !
-				TITLE Addand Subtract(AddSub.asm)
-
-				INCLUDE Irvine32.inc
-
-				.data
-				message BYTE "the total = ", 0
-				num1 sdword 3;// int number 3
-				num2 sdword 4;// int number 4
-				num3 sdword 5;// int number 5
-				total sdword ? ;// not initialized
-
-				.code
-
-				main PROC
-
-				mov	eax, num1;// eax = 3
-				add	eax, num2;// eax = 7
-				add	eax, num3;// eax = 12
-
-				mov total, eax;// copy 12 to total
-
-				mov edx, OFFSET message;// move the mem adress of message to the edx for printing
-				call WriteString;// displays what is in the edx
-
-				call WriteInt;//display the 12
-				; call WriteDec;//for unsinged ints only
-				call Crlf;//new line
-
-				exit
-				main ENDP
-				END main
-				!
-
-
-
-
-				comment!
-				TITLE Addand Subtract(AddSub.asm)
-
-				; This program addsand subtracts 32 - bit integers.
-
-				INCLUDE Irvine32.inc
-
-				.code
-				main PROC
-
-				mov	eax, 10000h; EAX = 10000h
-				add	eax, 40000h; EAX = 50000h
-				sub	eax, 20000h; EAX = 30000h
-				call	DumpRegs
-
-				exit
-				main ENDP
-				END main
-!
-Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 13:32:38
-Addand Subtract(AddSub.asm				     Symbols 2 - 1
+Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 14:47:13
+..\AddSub.asm						     Symbols 2 - 1
 
 
 
@@ -271,8 +144,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000003A Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000011 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000016 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000025 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -379,7 +252,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000011 Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000025 Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -612,8 +485,8 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-myString_len . . . . . . . . . .	Number	 0000003Ah   
-myString . . . . . . . . . . . .	Byte	 00000000 _DATA	
+message  . . . . . . . . . . . .	Byte	 00000000 _DATA	
+number . . . . . . . . . . . . .	Byte	 00000015 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
