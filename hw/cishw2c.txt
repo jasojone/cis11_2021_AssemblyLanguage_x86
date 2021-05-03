@@ -1,0 +1,31 @@
+
+COMMENT!
+Student:  Jason Jones
+Class:   cis11
+hw2c 
+!
+INCLUDE Irvine32.inc
+
+.data
+FIRST_QTR = 1
+SECOND_QTR = 2
+THIRD_QTR = 3
+FOURTH_QTR = 4
+quarters WORD FIRST_QTR, SECOND_QTR, THIRD_QTR, FOURTH_QTR
+
+
+.code
+main PROC
+
+mov	eax, FIRST_QTR
+mov	ebx, SECOND_QTR
+mov	ecx, THIRD_QTR
+mov	edx, FOURTH_QTR
+
+call	DumpRegs
+
+exit
+main ENDP
+END main
+
+

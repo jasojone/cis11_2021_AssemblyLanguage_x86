@@ -1,0 +1,26 @@
+
+COMMENT!
+Student:  Jason Jones
+Class:   cis11
+hw2d
+!
+INCLUDE Irvine32.inc
+
+.data
+Surrealism BYTE "Salvador Dali",0dh, 0ah, 0	
+Abstract BYTE "Jackson Pollock", 0dh, 0ah, 0
+impressionism BYTE "Renoir", 0dh, 0ah, 0
+
+
+.code
+main PROC
+
+mov edx, OFFSET Surrealism
+call WriteString
+
+
+call	DumpRegs
+
+exit
+main ENDP
+END main
