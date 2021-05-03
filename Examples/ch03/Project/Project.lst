@@ -1,7 +1,10 @@
-Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 14:47:13
-..\AddSub.asm						     Page 1 - 1
+Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 17:02:31
+Addand Subtract(AddSub.asm				     Page 1 - 1
 
 
+				TITLE Addand Subtract(AddSub.asm)
+
+				; This program addsand subtracts 32 - bit integers.
 
 				INCLUDE Irvine32.inc
 			      C ; Include file for Irvine32.lib             (Irvine32.inc)
@@ -22,36 +25,19 @@ Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 14:47:13
 			      C .LIST
 			      C 
 
- 00000000			.data
- 00000000 48 65 72 65 20	message BYTE "Here is the number: ", 0
-	   69 73 20 74 68
-	   65 20 6E 75 6D
-	   62 65 72 3A 20
-	   00
- 00000015 05			number SBYTE 5
-
  00000000			.code
-
  00000000			main PROC
 
- 00000000  0F B6 05		movzx eax, number;// eax = 5
-	   00000015 R
- 00000007  83 E8 0A		sub eax, 10
-
- 0000000A  BA 00000000 R	mov edx, OFFSET message;// move the mem adress of message to the edx for printing
-
- 0000000F  E8 00000000 E	call WriteString;// displays what is in the edx
-
- 00000014  E8 00000000 E	call WriteInt;//display the -5
-
- 00000019  E8 00000000 E	call Crlf;//new line
+ 00000000  B8 00010000		mov	eax, 10000h; EAX = 10000h
+ 00000005  05 00040000		add	eax, 40000h; EAX = 50000h
+ 0000000A  2D 00020000		sub	eax, 20000h; EAX = 30000h
+ 0000000F  E8 00000000 E	call	DumpRegs
 
 				exit
- 00000025			main ENDP
+ 0000001B			main ENDP
 				END main
-
-Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 14:47:13
-..\AddSub.asm						     Symbols 2 - 1
+Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/02/21 17:02:31
+Addand Subtract(AddSub.asm				     Symbols 2 - 1
 
 
 
@@ -144,8 +130,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000016 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000025 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001B Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -252,7 +238,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000025 Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001B Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -485,8 +471,6 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-message  . . . . . . . . . . . .	Byte	 00000000 _DATA	
-number . . . . . . . . . . . . .	Byte	 00000015 _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA

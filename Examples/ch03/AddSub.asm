@@ -1,26 +1,17 @@
+TITLE Addand Subtract(AddSub.asm)
+
+; This program addsand subtracts 32 - bit integers.
 
 INCLUDE Irvine32.inc
 
-.data
-message BYTE "Here is the number: ", 0
-number SBYTE 5
-
 .code
-
 main PROC
 
-movzx eax, number;// eax = 5
-sub eax, 10
-
-mov edx, OFFSET message;// move the mem adress of message to the edx for printing
-
-call WriteString;// displays what is in the edx
-
-call WriteInt;//display the -5
-
-call Crlf;//new line
+mov	eax, 10000h; EAX = 10000h
+add	eax, 40000h; EAX = 50000h
+sub	eax, 20000h; EAX = 30000h
+call	DumpRegs
 
 exit
 main ENDP
 END main
-
