@@ -1,15 +1,33 @@
-Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/05/21 11:00:48
-Addand Subtract(AddSub.asm				     Page 1 - 1
-
+Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/09/21 20:25:52
+..\AddSub.asm						     Page 1 - 1
 
 
 				COMMENT!
 				Student:  Jason Jones
 				Class : cis11
-				hw2b v1, v2
+				extra credit2
+
+				Create a new programand include the following :
+
+				1.   Declare two 4 byte signed integer variables named : num1 and num2
+				2.   Prompt the user to enter two numbers.   (See output)
+
+				3.   Read and assign the inputs to num1 and num2.
+
+				4.   Use the ADD instruction to add num1 and num2.
+
+				5.   Display the result.   (See output)
+
+				6.   Use the SUB instruction to subtract num1 and num2.
+
+				7.   Display the result.   (See output)
+
+				8.   Use the IMUL instruction to multiply num1 and num2.
+
+				9.   Display the result.   (See output)
+
 				!
 
-				TITLE Addand Subtract(AddSub.asm)
 
 				INCLUDE Irvine32.inc
 			      C ; Include file for Irvine32.lib             (Irvine32.inc)
@@ -31,40 +49,157 @@ Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/05/21 11:00:48
 			      C 
 
  00000000			.data
- 00000000 2D 35 20 2B 20	mathProb BYTE "-5 + 3 = ", 0
-	   33 20 3D 20 00
- 0000000A 53 61 79 20 22	s1 BYTE 'Say "Goodnight" Gracie'
-	   47 6F 6F 64 6E
-	   69 67 68 74 22
-	   20 47 72 61 63
-	   69 65
- 00000020 53 61 79 20 27	s2 BYTE "Say 'Goodnight' Gracie"
-	   47 6F 6F 64 6E
-	   69 67 68 74 27
-	   20 47 72 61 63
-	   69 65
 
-
- 00000036 FFFFFFFB		num1 SDWORD - 5
- 0000003A 00000003		num2 SDWORD 3
- 0000003E 00000000		num3 SDWORD 0
-
-
+ 00000000 00000000		num1 SDWORD ?
+ 00000004 00000000		num2 SDWORD ?
+ 00000008 00000000		total SDWORD ?
+ 0000000C 45 6E 74 65 72	prompt BYTE "Enter a number ", 0
+	   20 61 20 6E 75
+	   6D 62 65 72 20
+	   00
+ 0000001C 20 3D 20 00		showEqual BYTE " = ", 0
+ 00000020 6E 75 6D 31 20	showPlus BYTE "num1 + num2", 0
+	   2B 20 6E 75 6D
+	   32 00
+ 0000002C 6E 75 6D 31 20	showMinus BYTE "num1 - num2", 0
+	   2D 20 6E 75 6D
+	   32 00
+ 00000038 6E 75 6D 31 20	showMul BYTE "num1 * num2", 0
+	   2A 20 6E 75 6D
+	   32 00
  00000000			.code
- 00000000			main PROC
 
- 00000000  BA 0000000A R	mov edx, OFFSET s1
- 00000005  E8 00000000 E	call WriteString;// displays what is in the edx
- 0000000A  BA 00000020 R	mov edx, OFFSET s2
- 0000000F  E8 00000000 E	call WriteString;// displays what is in the edx
+ 00000000			main PROC
+ 00000000  BA 0000000C R	mov edx, OFFSET prompt
+ 00000005  E8 00000000 E	call WriteString
+ 0000000A  E8 00000000 E	call ReadInt
+ 0000000F  A3 00000000 R	mov num1, eax
+
  00000014  E8 00000000 E	call WriteString
- 00000019  E8 00000000 E	call crlf
+ 00000019  E8 00000000 E	call ReadInt
+ 0000001E  A3 00000004 R	mov num2, eax
+
+ 00000023  03 05 00000000 R	add eax, num1
+
+ 00000029  A3 00000008 R	mov total, eax
+
+ 0000002E  BA 00000020 R	mov edx, OFFSET showPlus
+ 00000033  E8 00000000 E	call WriteString
+
+ 00000038  A1 00000004 R	mov eax, num2
+
+ 0000003D  BA 0000001C R	mov edx, OFFSET showEqual
+ 00000042  E8 00000000 E	call WriteString
+
+ 00000047  A1 00000008 R	mov eax, total
+ 0000004C  E8 00000000 E	call WriteInt
+ 00000051  E8 00000000 E	call Crlf
+
+ 00000056  A1 00000000 R	mov eax, num1
+ 0000005B  A1 00000004 R	mov eax, num2
+
+ 00000060  2B 05 00000004 R	sub eax, num2
+
+ 00000066  A3 00000008 R	mov total, eax
+ 0000006B  E8 00000000 E	call WriteInt
+
+
+ 00000070  BA 0000002C R	mov edx, OFFSET showMinus
+ 00000075  E8 00000000 E	call WriteString
+
+ 0000007A  A1 00000004 R	mov eax, num2
+
+ 0000007F  BA 0000001C R	mov edx, OFFSET showEqual
+ 00000084  E8 00000000 E	call WriteString
+
+ 00000089  A1 00000008 R	mov eax, total
+ 0000008E  E8 00000000 E	call WriteInt
+ 00000093  E8 00000000 E	call Crlf
+
 
 
 				exit
- 00000025			main ENDP
+ 0000009F			main ENDP
 				END main
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				COMMENT!
+				Student:  Jason Jones
+				Class : cis11
+				extra credit 
+
+				Declare a 4 byte signed integer variable named : num1
+
+				2.   Initialize num1 with a value of 4.
+
+				3.   Display the value in num1.   (See output)
+
+				4.   Use the INC instruction to add one to the value in num1.
+
+				5.   Display the value in num1 after it has been incremented.   (See output)
+
+				6.   Use the DEC instruction to decrement the value in num1.
+
+				7.   Display the value in num1 after it has been decremented.   (See output)
+
+				8.   Use the NEG instruction to negate the value in num1.
+
+				9.   Display the value in num1 after it has been negated.   (See output
+
+
+
+
+				TITLE Addand Subtract(AddSub.asm)
+
+				; This program uses the inc dec and neg Mnemonic operands
+
+				INCLUDE Irvine32.inc
+
+				.data
+				num1 SBYTE 4
+
+				.code
+
+				main PROC
+
+				movzx	eax, num1
+
+				call WriteInt
+				call Crlf
+				inc eax
+				call WriteInt
+				call Crlf
+				dec eax
+				call WriteInt
+				call Crlf
+				neg eax 
+				call WriteInt
+				call Crlf
+
+
+				exit
+				main ENDP
+				END main
+				!
 
 
 				comment!
@@ -151,8 +286,8 @@ Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/05/21 11:00:48
 				main ENDP
 				END main
 !
-Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/05/21 11:00:48
-Addand Subtract(AddSub.asm				     Symbols 2 - 1
+Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/09/21 20:25:52
+..\AddSub.asm						     Symbols 2 - 1
 
 
 
@@ -245,8 +380,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000042 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000025 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000044 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000009F Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -353,7 +488,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000025 Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000009F Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -586,13 +721,15 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-mathProb . . . . . . . . . . . .	Byte	 00000000 _DATA	
-num1 . . . . . . . . . . . . . .	DWord	 00000036 _DATA	
-num2 . . . . . . . . . . . . . .	DWord	 0000003A _DATA	
-num3 . . . . . . . . . . . . . .	DWord	 0000003E _DATA	
+num1 . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+num2 . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
+prompt . . . . . . . . . . . . .	Byte	 0000000C _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-s1 . . . . . . . . . . . . . . .	Byte	 0000000A _DATA	
-s2 . . . . . . . . . . . . . . .	Byte	 00000020 _DATA	
+showEqual  . . . . . . . . . . .	Byte	 0000001C _DATA	
+showMinus  . . . . . . . . . . .	Byte	 0000002C _DATA	
+showMul  . . . . . . . . . . . .	Byte	 00000038 _DATA	
+showPlus . . . . . . . . . . . .	Byte	 00000020 _DATA	
+total  . . . . . . . . . . . . .	DWord	 00000008 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
