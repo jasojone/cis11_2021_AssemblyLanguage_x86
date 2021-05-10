@@ -1,8 +1,230 @@
-Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/09/21 20:25:52
+Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/10/21 00:09:15
 ..\AddSub.asm						     Page 1 - 1
 
 
-				COMMENT!
+				; ============================
+				; Attached:  	 HW 3abcde
+				; ============================
+				; Program: 	  HW_3a
+				; Class: cis11
+				; Programmer: Jason Jones
+
+				; ============================
+
+				comment!
+				INCLUDE Irvine32.inc
+
+				.data
+
+				SUNDAY = 0
+				MONDAY = 1
+				TUESDAY = 2
+				WEDNESDAY = 3
+				THURSDAY = 4
+				FRIDAY = 5
+				SATURDAY = 6
+				dayArray WORD SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+
+				.code
+
+				main PROC
+
+				mov eax, THURSDAY
+				mov ebx, WEDNESDAY
+				mov ecx, TUESDAY
+				mov edx, MONDAY
+
+				call DumpRegs
+
+				exit
+				main ENDP
+				END main
+				!
+
+
+
+				; ============================
+				; Program: 	  HW_3b
+				; Class: cis11
+				; Programmer: Jason Jones
+
+				; ============================
+				comment!
+				INCLUDE Irvine32.inc
+
+				.data
+
+				num1 DWORD ?
+				num2 DWORD ?
+				total DWORD ?
+				promptWidth BYTE "Enter a width ", 0
+				promptLenght BYTE "Enter a length ", 0
+				showResult BYTE "The area = ", 0
+
+				.code
+
+				main PROC
+
+				mov edx, OFFSET promptWidth;// move the print statement to the edx
+				call WriteString;// print
+
+				call ReadInt;// read user input
+				mov num1, eax;// move input to eax
+
+				mov edx, OFFSET promptLenght;// move the print statement to the edx
+				call WriteString;//print
+
+				call ReadInt;// read input
+				mov num2, eax;// move input to eax
+
+				mov eax, 0;// reset the regester 
+
+				mov eax, num1
+				imul eax, num2;// multiply num1 and num2
+				mov total, eax;// mov the result into the total variable 
+
+				mov edx, OFFSET showResult;// move the print statement to the edx
+				call WriteString;//print
+
+				mov eax, total;// move the total to the eax for writeint 
+				call WriteInt
+
+				exit
+				main ENDP
+				END main
+				!
+
+
+				; ============================
+				; Program: 	  HW_3c
+				; Class: cis11
+				; Programmer: Jason Jones
+
+				; ============================
+				comment!
+				INCLUDE Irvine32.inc
+
+				.data
+
+				nums WORD 1, 2, 3
+				prompt BYTE "Here are the array values: ", 0
+
+				.code
+
+				main PROC
+
+				mov edx, OFFSET prompt
+				call WriteString
+				call Crlf
+
+				mov esi, OFFSET nums
+				mov eax, 0
+				mov ax, [esi]
+				add esi, 2
+				call WriteInt
+				call Crlf
+				mov ax, [esi]
+				add esi, 2
+				call WriteInt
+				call Crlf
+				mov ax, [esi]
+				add esi, 2
+
+				call WriteInt
+				call Crlf
+
+				exit
+				main ENDP
+				END main
+				!
+
+
+				; ============================
+				; Program: 	  HW_3d
+				; Class: cis11
+				; Programmer: Jason Jones
+
+				; ============================
+
+				INCLUDE Irvine32.inc
+			      C ; Include file for Irvine32.lib             (Irvine32.inc)
+			      C 
+			      C ;OPTION CASEMAP:NONE		; optional: make identifiers case-sensitive
+			      C 
+			      C INCLUDE SmallWin.inc		; MS-Windows prototypes, structures, and constants
+			      C .NOLIST
+			      C .LIST
+			      C 
+			      C INCLUDE VirtualKeys.inc
+			      C ; VirtualKeys.inc
+			      C .NOLIST
+			      C .LIST
+			      C 
+			      C 
+			      C .NOLIST
+			      C .LIST
+			      C 
+
+ 00000000			.data
+
+ 00000000 00000003		num1 DWORD 3
+ 00000004 00000001		num2 DWORD 1
+ 00000008 00000000		sum DWORD ?
+ 0000000C 00000000		diff DWORD ?
+ 00000010 54 68 65 20 73	outPut1 BYTE "The sum = ", 0
+	   75 6D 20 3D 20
+	   00
+ 0000001B 20 61 6E 64 20	outPut2 BYTE " and the differece = ", 0
+	   74 68 65 20 64
+	   69 66 66 65 72
+	   65 63 65 20 3D
+	   20 00
+
+
+ 00000000			.code
+
+ 00000000			main PROC
+
+ 00000000  A1 00000000 R	mov eax, num1
+ 00000005  A1 00000004 R	mov eax, num2
+ 0000000A  03 05 00000000 R	add eax, num1
+ 00000010  A3 00000008 R	mov sum, eax
+
+ 00000015  A1 00000004 R	mov eax, num2
+ 0000001A  A1 00000000 R	mov eax, num1
+ 0000001F  2B 05 00000004 R	sub eax, num2
+ 00000025  A3 0000000C R	mov diff, eax
+
+ 0000002A  BA 00000010 R	mov edx, OFFSET outPut1
+ 0000002F  E8 00000000 E	call WriteString
+ 00000034  A1 00000008 R	mov eax, sum
+ 00000039  E8 00000000 E	call WriteInt
+
+ 0000003E  BA 0000001B R	mov edx, OFFSET outPut2
+ 00000043  E8 00000000 E	call WriteString
+ 00000048  A1 0000000C R	mov eax, diff
+ 0000004D  E8 00000000 E	call WriteInt
+ 00000052  E8 00000000 E	call Crlf
+
+				exit
+ 0000005E			main ENDP
+				END main
+
+				!
+
+
+
+
+
+
+
+
+
+
+
+
+
+				comment!
 				Student:  Jason Jones
 				Class : cis11
 				extra credit2
@@ -26,120 +248,72 @@ Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/09/21 20:25:52
 
 				9.   Display the result.   (See output)
 
-				!
-
-
 				INCLUDE Irvine32.inc
-			      C ; Include file for Irvine32.lib             (Irvine32.inc)
-			      C 
-			      C ;OPTION CASEMAP:NONE		; optional: make identifiers case-sensitive
-			      C 
-			      C INCLUDE SmallWin.inc		; MS-Windows prototypes, structures, and constants
-			      C .NOLIST
-			      C .LIST
-			      C 
-			      C INCLUDE VirtualKeys.inc
-			      C ; VirtualKeys.inc
-			      C .NOLIST
-			      C .LIST
-			      C 
-			      C 
-			      C .NOLIST
-			      C .LIST
-			      C 
 
- 00000000			.data
+				.data
 
- 00000000 00000000		num1 SDWORD ?
- 00000004 00000000		num2 SDWORD ?
- 00000008 00000000		total SDWORD ?
- 0000000C 45 6E 74 65 72	prompt BYTE "Enter a number ", 0
-	   20 61 20 6E 75
-	   6D 62 65 72 20
-	   00
- 0000001C 20 3D 20 00		showEqual BYTE " = ", 0
- 00000020 6E 75 6D 31 20	showPlus BYTE "num1 + num2", 0
-	   2B 20 6E 75 6D
-	   32 00
- 0000002C 6E 75 6D 31 20	showMinus BYTE "num1 - num2", 0
-	   2D 20 6E 75 6D
-	   32 00
- 00000038 6E 75 6D 31 20	showMul BYTE "num1 * num2", 0
-	   2A 20 6E 75 6D
-	   32 00
- 00000000			.code
+				num1 SDWORD ?
+				num2 SDWORD ?
+				total SDWORD ?
+				total2 SDWORD ?
+				prompt BYTE "Enter a number ", 0
+				showEqual BYTE " = ", 0
+				showPlus BYTE "num1 + num2", 0
+				showMinus BYTE "num1 - num2", 0
+				showMul BYTE "num1 * num2", 0
+				.code
 
- 00000000			main PROC
- 00000000  BA 0000000C R	mov edx, OFFSET prompt
- 00000005  E8 00000000 E	call WriteString
- 0000000A  E8 00000000 E	call ReadInt
- 0000000F  A3 00000000 R	mov num1, eax
+				main PROC
+				mov edx, OFFSET prompt
+				call WriteString
+				call ReadInt
+				mov num1, eax
 
- 00000014  E8 00000000 E	call WriteString
- 00000019  E8 00000000 E	call ReadInt
- 0000001E  A3 00000004 R	mov num2, eax
+				call WriteString
+				call ReadInt
+				mov num2, eax
 
- 00000023  03 05 00000000 R	add eax, num1
+				add eax, num1
 
- 00000029  A3 00000008 R	mov total, eax
+				mov total, eax
 
- 0000002E  BA 00000020 R	mov edx, OFFSET showPlus
- 00000033  E8 00000000 E	call WriteString
+				mov edx, OFFSET showPlus
+				call WriteString
 
- 00000038  A1 00000004 R	mov eax, num2
+				mov eax, num2
 
- 0000003D  BA 0000001C R	mov edx, OFFSET showEqual
- 00000042  E8 00000000 E	call WriteString
+				mov edx, OFFSET showEqual
+				call WriteString
 
- 00000047  A1 00000008 R	mov eax, total
- 0000004C  E8 00000000 E	call WriteInt
- 00000051  E8 00000000 E	call Crlf
-
- 00000056  A1 00000000 R	mov eax, num1
- 0000005B  A1 00000004 R	mov eax, num2
-
- 00000060  2B 05 00000004 R	sub eax, num2
-
- 00000066  A3 00000008 R	mov total, eax
- 0000006B  E8 00000000 E	call WriteInt
+				mov eax, total
+				call WriteInt
+				call Crlf
 
 
- 00000070  BA 0000002C R	mov edx, OFFSET showMinus
- 00000075  E8 00000000 E	call WriteString
+				mov eax, num2
+				mov eax, num1
 
- 0000007A  A1 00000004 R	mov eax, num2
+				sub eax, num2
 
- 0000007F  BA 0000001C R	mov edx, OFFSET showEqual
- 00000084  E8 00000000 E	call WriteString
+				mov total2, eax
 
- 00000089  A1 00000008 R	mov eax, total
- 0000008E  E8 00000000 E	call WriteInt
- 00000093  E8 00000000 E	call Crlf
+				mov edx, OFFSET showMinus
+				call WriteString
 
+				mov eax, num2
 
+				mov edx, OFFSET showEqual
+				call WriteString
+
+				mov eax, total2
+				call WriteInt
+				call Crlf
 
 				exit
- 0000009F			main ENDP
+				main ENDP
 				END main
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+				!
 
 
 				COMMENT!
@@ -286,7 +460,7 @@ Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/09/21 20:25:52
 				main ENDP
 				END main
 !
-Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/09/21 20:25:52
+Microsoft (R) Macro Assembler Version 14.28.29914.0	    05/10/21 00:09:15
 ..\AddSub.asm						     Symbols 2 - 1
 
 
@@ -380,8 +554,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000044 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000009F Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000031 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000005E Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -488,7 +662,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000009F Public STDCALL
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000005E Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -711,6 +885,7 @@ black  . . . . . . . . . . . . .	Number	 00000000h
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
+diff . . . . . . . . . . . . . .	DWord	 0000000C _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
@@ -723,13 +898,10 @@ lightRed . . . . . . . . . . . .	Number	 0000000Ch
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 num1 . . . . . . . . . . . . . .	DWord	 00000000 _DATA	
 num2 . . . . . . . . . . . . . .	DWord	 00000004 _DATA	
-prompt . . . . . . . . . . . . .	Byte	 0000000C _DATA	
+outPut1  . . . . . . . . . . . .	Byte	 00000010 _DATA	
+outPut2  . . . . . . . . . . . .	Byte	 0000001B _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-showEqual  . . . . . . . . . . .	Byte	 0000001C _DATA	
-showMinus  . . . . . . . . . . .	Byte	 0000002C _DATA	
-showMul  . . . . . . . . . . . .	Byte	 00000038 _DATA	
-showPlus . . . . . . . . . . . .	Byte	 00000020 _DATA	
-total  . . . . . . . . . . . . .	DWord	 00000008 _DATA	
+sum  . . . . . . . . . . . . . .	DWord	 00000008 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
