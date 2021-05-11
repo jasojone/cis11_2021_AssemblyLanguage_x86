@@ -7,7 +7,7 @@
 
 ; ============================
 
-comment!
+; comment!
 INCLUDE Irvine32.inc
 
 .data
@@ -186,7 +186,42 @@ END main
 !
 
 
+; ============================
+; Program: 	  HW_3e
+; Class: cis11
+; Programmer: Jason Jones
 
+; ============================
+comment!
+INCLUDE Irvine32.inc
+
+.data
+
+num1 SWORD 3
+num2 SWORD -4
+
+.code
+
+main PROC
+
+movzx eax, num1
+call WriteInt
+call Crlf
+
+neg eax
+call WriteInt
+call Crlf
+
+movsx ebx, num2
+mov eax, ebx
+call WriteInt
+call Crlf
+
+exit
+main ENDP
+END main
+
+!
 
 
 
@@ -221,6 +256,7 @@ Create a new programand include the following :
 
 9.   Display the result.   (See output)
 
+
 INCLUDE Irvine32.inc
 
 .data
@@ -229,6 +265,7 @@ num1 SDWORD ?
 num2 SDWORD ?
 total SDWORD ?
 total2 SDWORD ?
+total3 SDWORD ?
 prompt BYTE "Enter a number ", 0
 showEqual BYTE " = ", 0
 showPlus BYTE "num1 + num2", 0
@@ -279,6 +316,26 @@ mov edx, OFFSET showEqual
 call WriteString
 
 mov eax, total2
+call WriteInt
+call Crlf
+
+
+mov eax, num2
+mov eax, num1
+
+imul eax, num2
+
+mov total3, eax
+
+mov edx, OFFSET showMul
+call WriteString
+
+mov eax, num2
+
+mov edx, OFFSET showEqual
+call WriteString
+
+mov eax, total3
 call WriteInt
 call Crlf
 
