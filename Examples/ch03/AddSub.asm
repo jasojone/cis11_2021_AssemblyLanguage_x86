@@ -6,8 +6,7 @@
 ; Programmer: Jason Jones
 
 ; ============================
-
-; comment!
+comment!
 INCLUDE Irvine32.inc
 
 .data
@@ -256,7 +255,6 @@ Create a new programand include the following :
 
 9.   Display the result.   (See output)
 
-
 INCLUDE Irvine32.inc
 
 .data
@@ -369,9 +367,6 @@ Declare a 4 byte signed integer variable named : num1
 
 9.   Display the value in num1 after it has been negated.   (See output
 
-
-
-
 TITLE Addand Subtract(AddSub.asm)
 
 ; This program uses the inc dec and neg Mnemonic operands
@@ -398,7 +393,6 @@ call Crlf
 neg eax 
 call WriteInt
 call Crlf
-
 
 exit
 main ENDP
@@ -456,19 +450,6 @@ main ENDP
 END main
 
 !
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 comment!
